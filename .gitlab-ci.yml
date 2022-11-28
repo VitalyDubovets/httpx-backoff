@@ -1,0 +1,4 @@
+include:
+  - project: 'digitalplatform/infrastructure/cicd-pipelines'
+    ref: $PIPELINE_REF
+    file: '/pipelines/python-common.yml'

@@ -1,0 +1,72 @@
+[tool.poetry]
+name = "httpx-backoff"
+version = "1.0.0"
+description = "Библиотека, которая позволяет выполнять повторные запрос при недостижении определенных условий"
+authors = ["Vitaly <dubovetsvitaliy@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+httpx = "^0.23.0"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.20.0"
+pytest = "^7.1.2"
+pytest-asyncio = "^0.19.0"
+pytest-xdist = "^2.5.0"
+pytest-sugar = "^0.9.5"
+pytest-cov = "^3.0.0"
+uvicorn = "^0.18.3"
+asgiref = "^3.5.2"
+mypy = "^0.971"
+
+[[tool.poetry.source]]
+name = "samoletplus"
+url = "https://nexus.samoletplus.ru/repository/pypi-group/simple"
+default = true
+secondary = false
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests"
+]
+python_files = "tests.py test_*.py *_tests.py"
+addopts = "--numprocesses=0"
+
+[tool.black]
+line-length = 120
+target-version = ['py310']
+include = '\.pyi?$'
+exclude = '''
+/(
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \S*/tests/\S*
+)/
+'''
+
+[tool.isort]
+src_paths = ["app", "tests"]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 120
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+disallow_untyped_defs = true
+pretty = true
+exclude = '''
+(?x)(
+    \S*tests\S*
+)
+'''
